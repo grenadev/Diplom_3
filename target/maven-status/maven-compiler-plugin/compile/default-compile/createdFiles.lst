@@ -1,0 +1,6 @@
+ru\stellarburgers\PageObjects\MainPage.class
+ru\stellarburgers\PageObjects\RegistrationPage.class
+ru\stellarburgers\PageObjects\DesignerPage.class
+ru\stellarburgers\PageObjects\ProfilePage.class
+ru\stellarburgers\PageObjects\ForgotPasswordPage.class
+ru\stellarburgers\PageObjects\LoginPage.class
