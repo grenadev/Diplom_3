@@ -3,7 +3,7 @@ package tests;
 import com.codeborne.selenide.Condition;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
-import ru.stellarburgers.PageObjects.DesignerPage;
+import ru.stellarburgers.pageobjects.DesignerPage;
 
 import java.time.Duration;
 
@@ -16,29 +16,29 @@ public class DesignerTests {
     @DisplayName("choose bun on construcor")
     public void chooseBunOnConstructor() {
 
-        DesignerPage designerPage = open(DesignerPage.urlOpen, DesignerPage.class)
+        DesignerPage designerPage = open(DesignerPage.URL_OPEN, DesignerPage.class)
                 .clickBunsButton();
 
-        assertTrue(designerPage.bunSection.shouldBe(Condition.visible, Duration.ofSeconds(4)).isDisplayed());
+        assertTrue(designerPage.checkBunIsDisplayed());
     }
 
     @Test
     @DisplayName("choose sauce on constructor")
     public void chooseSauceOnConstructor() {
 
-        DesignerPage designerPage = open(DesignerPage.urlOpen, DesignerPage.class)
+        DesignerPage designerPage = open(DesignerPage.URL_OPEN, DesignerPage.class)
                 .clickSauceButton();
 
-        assertTrue(designerPage.sauceSection.shouldBe(Condition.visible, Duration.ofSeconds(4)).isDisplayed());
+        assertTrue(designerPage.checkSauceIsDisplayed());
     }
 
     @Test
     @DisplayName("choose main on constructor")
     public void chooseMainOnConstructor() {
 
-        DesignerPage designerPage = open(DesignerPage.urlOpen, DesignerPage.class)
+        DesignerPage designerPage = open(DesignerPage.URL_OPEN, DesignerPage.class)
                 .clickMainButton();
 
-        assertTrue(designerPage.mainSection.shouldBe(Condition.visible, Duration.ofSeconds(4)).isDisplayed());
+        assertTrue(designerPage.checkMainIsDisplayed());
     }
 }

@@ -1,52 +1,71 @@
-package ru.stellarburgers.PageObjects;
+package ru.stellarburgers.pageobjects;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.time.Duration;
+
 public class DesignerPage {
 
-    public static String urlOpen = "https://stellarburgers.nomoreparties.site/";
+    public static final String URL_OPEN = "https://stellarburgers.nomoreparties.site/";
 
     //локатор икнонки stellarburgers в хедере
     @FindBy(how = How.CSS, using = "header>nav>div>a")
-    public SelenideElement burgerIcon;
+    private SelenideElement burgerIcon;
 
     //локатор кнопки "Конструктор" в хедере
     @FindBy(how = How.XPATH, using = "//p[text()='Конструктор']")
-    public SelenideElement designerButton;
+    private SelenideElement designerButton;
 
     //локатор лейбла "Соберите бургер"
     @FindBy(how = How.XPATH, using = "//h1[text()='Соберите бургер']")
-    public SelenideElement burgerLabel;
+    private SelenideElement burgerLabel;
 
     //локатор кнопки "Булки"
     @FindBy(how = How.CSS, using = "div:nth-child(2) > div:nth-child(1) > span")
-    public SelenideElement bunButton;
+    private SelenideElement bunButton;
 
     //локатор кнопки "Соусы"
     @FindBy(how = How.CSS, using = "div:nth-child(2) > div:nth-child(2) > span")
-    public SelenideElement sauceButton;
+    private SelenideElement sauceButton;
 
     //локатор кнопки "Начинки"
     @FindBy(how = How.CSS, using = "div:nth-child(2) > div:nth-child(3) > span")
-    public SelenideElement mainButton;
+    private SelenideElement mainButton;
 
     //локатор раздела "Булки"
     @FindBy(how = How.CSS, using = "div.BurgerIngredients_ingredients__menuContainer__Xu3Mo > ul:nth-child(2)")
-    public SelenideElement bunSection;
+    private SelenideElement bunSection;
 
     //локатор раздела "Соусы"
     @FindBy(how = How.CSS, using = "div.BurgerIngredients_ingredients__menuContainer__Xu3Mo > ul:nth-child(4)")
-    public SelenideElement sauceSection;
+    private SelenideElement sauceSection;
 
     //локатор раздела "Начинки"
     @FindBy(how = How.CSS, using = "div.BurgerIngredients_ingredients__menuContainer__Xu3Mo > ul:nth-child(6)")
-    public SelenideElement mainSection;
+    private SelenideElement mainSection;
+
+    public boolean checkBunIsDisplayed() {
+        return bunSection.shouldBe(Condition.visible, Duration.ofSeconds(4)).isDisplayed();
+    }
+
+    public boolean checkSauceIsDisplayed() {
+        return sauceSection.shouldBe(Condition.visible, Duration.ofSeconds(4)).isDisplayed();
+    }
+
+    public boolean checkMainIsDisplayed() {
+        return mainSection.shouldBe(Condition.visible, Duration.ofSeconds(4)).isDisplayed();
+    }
+
+    public boolean checkBurgerLabel() {
+        return burgerLabel.shouldBe(Condition.visible, Duration.ofSeconds(4)).isDisplayed();
+    }
 
     public DesignerPage clickBunsButton() {
-        this.bunButton.contextClick();
+        bunButton.contextClick();
         return Selenide.page(DesignerPage.class);
     }
 

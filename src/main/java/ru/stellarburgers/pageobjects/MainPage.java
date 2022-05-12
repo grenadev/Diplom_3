@@ -1,4 +1,4 @@
-package ru.stellarburgers.PageObjects;
+package ru.stellarburgers.pageobjects;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
@@ -12,15 +12,24 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class MainPage {
 
-    public static String urlOpen = "https://stellarburgers.nomoreparties.site/";
+    public static final String URL_OPEN = "https://stellarburgers.nomoreparties.site/";
 
     //локатор кнопки "Войти в аккаунт"
     @FindBy(how = How.XPATH, using = "//button[text()='Войти в аккаунт']")
-    public SelenideElement loginToAccount;
+    private SelenideElement loginToAccount;
 
     //локатор кнопки "Личный кабинет"
     @FindBy(how = How.CSS, using = "div>header>nav>a>p")
-    public SelenideElement loginToAccountFromHeader;
+    private SelenideElement loginToAccountFromHeader;
+
+    //локатор кнопки "Оформить заказ"
+    @FindBy(how = How.CSS, using = "section.BurgerConstructor_basket__29Cd7.mt-25>div>button")
+    private SelenideElement createOrderButton;
+
+
+    public boolean checkOrderButton() {
+        return createOrderButton.shouldBe(Condition.visible, Duration.ofSeconds(4)).isDisplayed();
+    }
 
     public LoginPage clickToLoginMainPage() {
         this.loginToAccount.click();
@@ -37,9 +46,6 @@ public class MainPage {
         return Selenide.page(ProfilePage.class);
     }
 
-    //локатор кнопки "Оформить заказ"
-    @FindBy(how = How.CSS, using = "section.BurgerConstructor_basket__29Cd7.mt-25>div>button")
-    public SelenideElement createOrderButton;
 
     public void waitForLoadAfterLogin() {
         createOrderButton.shouldBe(Condition.visible, Duration.ofSeconds(8));

@@ -1,4 +1,4 @@
-package ru.stellarburgers.PageObjects;
+package ru.stellarburgers.pageobjects;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -7,32 +7,35 @@ import org.openqa.selenium.support.How;
 
 public class ProfilePage {
 
-    public static String urlOpen = "https://stellarburgers.nomoreparties.site/account/profile";
+    public static final String URL_OPEN = "https://stellarburgers.nomoreparties.site/account/profile";
 
     //локатор кнопки "Выйти"
     @FindBy(how = How.XPATH, using = "//button[text()='Выход']")
-    public SelenideElement logoutButton;
+    private SelenideElement logoutButton;
 
     //локатор поля "Имя"
     @FindBy(how = How.CSS, using = "li:nth-child(1) div>div>input")
-    public SelenideElement fieldName;
+    private SelenideElement fieldName;
 
     //локатор поля "Логин"
     @FindBy(how = How.CSS, using = "li:nth-child(2) div>div>input")
-    public SelenideElement fieldLogin;
+    private SelenideElement fieldLogin;
 
     //локатор поля "Пароль"
     @FindBy(how = How.CSS, using = "li:nth-child(3) div>div>input")
-    public SelenideElement fieldPassword;
+    private SelenideElement fieldPassword;
 
     //локатор икнонки stellarburgers в хедере
     @FindBy(how = How.CSS, using = "header>nav>div>a")
-    public SelenideElement burgerIcon;
+    private SelenideElement burgerIcon;
 
     //локатор кнопки "Конструктор" в хедере
     @FindBy(how = How.XPATH, using = "//p[text()='Конструктор']")
-    public SelenideElement designerButton;
+    private SelenideElement designerButton;
 
+    public String getValueFieldLogin () {
+        return fieldLogin.getValue();
+    }
 
     public DesignerPage clickBurgerIcon() {
         this.burgerIcon.click();

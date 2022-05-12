@@ -1,4 +1,4 @@
-package ru.stellarburgers.PageObjects;
+package ru.stellarburgers.pageobjects;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
@@ -11,28 +11,28 @@ import java.time.Duration;
 
 public class LoginPage {
 
-    public static String urlRegistration = "https://stellarburgers.nomoreparties.site/login";
+    public static final String URL_OPEN = "https://stellarburgers.nomoreparties.site/login";
 
 
     //локатор поля "Email"
     @FindBy(how = How.CSS, using = "fieldset:nth-child(1) > div > div > input")
-    public SelenideElement emailField;
+    private SelenideElement emailField;
 
     //локатор поля "Пароль"
     @FindBy(how = How.CSS, using = "fieldset:nth-child(2) > div > div > input")
-    public SelenideElement passwordField;
+    private SelenideElement passwordField;
 
     //локатор кнопки "Восстановить пароль"
     @FindBy(how = How.XPATH, using = "//a[text()='Восстановить пароль']")
-    public SelenideElement forgotButton;
+    private SelenideElement forgotButton;
 
     //локатор кнопки "Войти"
     @FindBy(how = How.XPATH, using = "//button[text()='Войти']")
-    public SelenideElement loginButton;
+    private SelenideElement loginButton;
 
     //локатор кнопки "Зарегистрироваться"
     @FindBy(how = How.XPATH, using = "//a[text()='Зарегистрироваться']")
-    public SelenideElement registerButton;
+    private SelenideElement registerButton;
 
     public LoginPage setEmail(String email) {
         emailField.shouldBe(Condition.visible, Duration.ofSeconds(8));
@@ -54,4 +54,9 @@ public class LoginPage {
         this.loginButton.click();
         return Selenide.page(MainPage.class);
     }
+
+    public boolean checkRegisterButton() {
+        return registerButton.shouldBe(Condition.visible, Duration.ofSeconds(4)).isDisplayed();
+    }
+
 }

@@ -1,4 +1,4 @@
-package ru.stellarburgers.PageObjects;
+package ru.stellarburgers.pageobjects;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -7,11 +7,11 @@ import org.openqa.selenium.support.How;
 
 public class ForgotPasswordPage {
 
-    public static String urlOpen = "https://stellarburgers.nomoreparties.site/forgot-password";
+    public static final String URL_OPEN = "https://stellarburgers.nomoreparties.site/forgot-password";
 
     //локатор кнопки "Войти"
     @FindBy(how = How.XPATH, using = "//a[text()='Войти']")
-    public SelenideElement loginButton;
+    private SelenideElement loginButton;
 
     public LoginPage clickLoginForgotPage() {
         this.loginButton.click();

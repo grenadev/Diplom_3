@@ -1,4 +1,4 @@
-package ru.stellarburgers.PageObjects;
+package ru.stellarburgers.pageobjects;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -9,32 +9,32 @@ import org.openqa.selenium.support.How;
 
 public class RegistrationPage {
 
-    public static String urlOpen = "https://stellarburgers.nomoreparties.site/register";
+    public static final String URL_OPEN = "https://stellarburgers.nomoreparties.site/register";
 
 
     //локатор поля "Имя"
     @FindBy(how = How.CSS, using = "fieldset:nth-child(1) > div > div > input")
-    public SelenideElement nameField;
+    private SelenideElement nameField;
 
     //локатор поля "Email"
     @FindBy(how = How.CSS, using = "fieldset:nth-child(2) > div > div > input")
-    public SelenideElement emailField;
+    private SelenideElement emailField;
 
     //локатор поля "Пароль"
     @FindBy(how = How.CSS, using = "fieldset:nth-child(3) > div > div > input")
-    public SelenideElement passwordField;
+    private SelenideElement passwordField;
 
     //локатор лейбла "Ошибка при вводе пароля"
     @FindBy(how = How.CSS, using = "fieldset:nth-child(3) > div > p")
-    public SelenideElement passwordError;
+    private SelenideElement passwordError;
 
     //локатор кнопки "Зарегистрироваться"
     @FindBy(how = How.XPATH, using = "//button[text()='Зарегистрироваться']")
-    public SelenideElement registrationButton;
+    private SelenideElement registrationButton;
 
     //локатор кнопки "Войти"
     @FindBy(how = How.XPATH, using = "//a[text()='Войти']")
-    public SelenideElement loginButton;
+    private SelenideElement loginButton;
 
     public RegistrationPage setNameRegPage(String name) {
         this.nameField.sendKeys(name);
@@ -62,7 +62,7 @@ public class RegistrationPage {
     }
 
     public void registrationNewAccount(String email, String password) {
-        LoginPage loginPage = Selenide.open(RegistrationPage.urlOpen, RegistrationPage.class)
+        LoginPage loginPage = Selenide.open(RegistrationPage.URL_OPEN, RegistrationPage.class)
                 .setNameRegPage("Name")
                 .setEmailRegPage(email)
                 .setPasswordRegPage(password)
