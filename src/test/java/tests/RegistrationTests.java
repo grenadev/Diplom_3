@@ -5,6 +5,7 @@ import io.restassured.response.ValidatableResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import ru.stellarburgers.client.UserClient;
 import ru.stellarburgers.model.User;
@@ -18,19 +19,15 @@ import static org.junit.Assert.assertTrue;
 
 public class RegistrationTests extends BaseTest {
 
-    User user;
-    UserClient userClient;
+    private static User user;
+    private static UserClient userClient;
     String auth;
-    boolean initialization;
 
-    @Before
-    public void setUp() {
 
-        if (!initialization) {
-            userClient = new UserClient();
-            user = UserDataGenerator.generateUserData();
-            initialization = true;
-        }
+    @BeforeClass
+    public static void setUp() {
+        userClient = new UserClient();
+        user = UserDataGenerator.generateUserData();
     }
 
     @After

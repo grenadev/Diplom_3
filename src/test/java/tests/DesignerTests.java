@@ -19,7 +19,7 @@ public class DesignerTests {
         DesignerPage designerPage = open(DesignerPage.URL_OPEN, DesignerPage.class)
                 .clickBunsButton();
 
-        assertTrue(designerPage.checkBunIsDisplayed());
+        assertTrue(designerPage.assertChooseBunButton());
     }
 
     @Test
@@ -29,7 +29,7 @@ public class DesignerTests {
         DesignerPage designerPage = open(DesignerPage.URL_OPEN, DesignerPage.class)
                 .clickSauceButton();
 
-        assertTrue(designerPage.checkSauceIsDisplayed());
+        assertTrue(designerPage.assertChooseSauceButton());
     }
 
     @Test
@@ -39,6 +39,6 @@ public class DesignerTests {
         DesignerPage designerPage = open(DesignerPage.URL_OPEN, DesignerPage.class)
                 .clickMainButton();
 
-        assertTrue(designerPage.checkMainIsDisplayed());
+        assertTrue(designerPage.assertChooseMainButton());
     }
 }

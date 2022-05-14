@@ -84,7 +84,7 @@ public class UserClient extends StellarRestClient {
                 .then();
     }
 
-    @Step("Delete user")
+    @Step("Delete current user")
     public ValidatableResponse deleteUser(String auth) {
         return given()
                 .spec(getBaseSpec())

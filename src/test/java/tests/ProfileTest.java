@@ -3,6 +3,7 @@ package tests;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import ru.stellarburgers.client.UserClient;
 import ru.stellarburgers.model.User;
@@ -16,19 +17,20 @@ import static org.junit.Assert.assertTrue;
 
 public class ProfileTest {
 
-    User user;
-    UserClient userClient;
+    private static User user;
+    private static UserClient userClient;
     String auth;
-    boolean initialization;
+
+
+    @BeforeClass
+    public static void setUp() {
+        userClient = new UserClient();
+        user = UserDataGenerator.generateUserData();
+    }
 
     @Before
-    public void setUp() {
-
-        if (!initialization) {
-            userClient = new UserClient();
-            user = UserDataGenerator.generateUserData();
-            initialization = true;
-        }
+    public void setUpTests() {
+        auth = userClient.createNewUser(user).extract().body().path("accessToken");
     }
 
     @After

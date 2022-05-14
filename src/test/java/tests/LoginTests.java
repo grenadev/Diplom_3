@@ -3,6 +3,7 @@ package tests;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 
@@ -20,20 +21,22 @@ import static org.junit.Assert.assertTrue;
 
 public class LoginTests extends BaseTest {
 
-    User user;
-    UserClient userClient;
+    private static User user;
+    private static UserClient userClient;
     String auth;
-    boolean initialization;
+
+
+    @BeforeClass
+    public static void setUp() {
+        userClient = new UserClient();
+        user = UserDataGenerator.generateUserData();
+    }
 
     @Before
-    public void setUp() {
-
-        if (!initialization) {
-            userClient = new UserClient();
-            user = UserDataGenerator.generateUserData();
-            initialization = true;
-        }
+    public void setUpTests() {
+        auth = userClient.createNewUser(user).extract().body().path("accessToken");
     }
+
 
     @After
     public void tearDown() {
@@ -49,8 +52,6 @@ public class LoginTests extends BaseTest {
     @DisplayName("login from header")
     public void loginFromHeader() {
 
-        auth = userClient.createNewUser(user).extract().body().path("accessToken");
-
         MainPage mainPage = open(MainPage.URL_OPEN, MainPage.class)
                 .clickToLoginFromHeader()
                 .setEmail(user.getEmail())
@@ -65,7 +66,6 @@ public class LoginTests extends BaseTest {
     @DisplayName("login from main page")
     public void loginFromMainPage() throws InterruptedException {
 
-        auth = userClient.createNewUser(user).extract().body().path("accessToken");
 
         MainPage mainPage = open(MainPage.URL_OPEN, MainPage.class)
                 .clickToLoginMainPage()
@@ -81,7 +81,6 @@ public class LoginTests extends BaseTest {
     @DisplayName("login from forgot password")
     public void loginFromForgotPassword() {
 
-        auth = userClient.createNewUser(user).extract().body().path("accessToken");
 
         MainPage mainPage = open(ForgotPasswordPage.URL_OPEN, ForgotPasswordPage.class)
                 .clickLoginForgotPage()
@@ -97,7 +96,6 @@ public class LoginTests extends BaseTest {
     @DisplayName("login from registration")
     public void loginFromRegistration() {
 
-        auth = userClient.createNewUser(user).extract().body().path("accessToken");
 
         MainPage mainPage = open(RegistrationPage.URL_OPEN, RegistrationPage.class)
                 .clickLoginRegPage()
